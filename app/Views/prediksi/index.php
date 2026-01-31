@@ -2,60 +2,80 @@
 <?= $this->extend('layout/layout'); ?>
 <?= $this->section('content'); ?>
 
-<div class="min-h-screen bg-[#EAEAEA] py-4 px-4 font-sans text-gray-800 flex items-center justify-center">
-    <div class="container max-w-xl">
+<div class="min-h-screen bg-[#F8FAFB] py-12 px-6 font-sans text-[#1A1A1A]">
+    <div class="container mx-auto max-w-4xl text-center">
 
-        <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-[#2DAA9E] mb-2">Mulai Prediksi</h1>
-            <p class="text-gray-600">Masukkan parameter Alpha untuk menghitung peramalan.</p>
+        <div class="mb-12">
+            <div class="flex justify-center items-center gap-3 mb-4">
+                <span class="w-16 h-1.5 bg-[#26CCC2] rounded-full"></span>
+                <span class="text-[#26CCC2] font-black tracking-[0.3em] text-sm uppercase">K-Means Configuration</span>
+                <span class="w-16 h-1.5 bg-[#26CCC2] rounded-full"></span>
+            </div>
+            <h1 class="text-6xl font-black tracking-tighter uppercase mb-2">Mulai <span class="text-gray-400">Clustering</span></h1>
+            <p class="text-gray-500 font-medium text-lg italic">Tentukan jumlah kelompok untuk memetakan pola pendidikan tokoh sukses.</p>
         </div>
 
-        <?php if (session()->getFlashdata('error')) : ?>
-            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded shadow-sm" role="alert">
-                <p class="font-bold">Error</p>
-                <p><?= session()->getFlashdata('error') ?></p>
-            </div>
-        <?php endif; ?>
-        <?php if (session()->getFlashdata('success')) : ?>
-            <div class="bg-[#66D2CE]/30 border-l-4 border-[#2DAA9E] text-[#2DAA9E] p-4 mb-6 rounded shadow-sm" role="alert">
-                <p class="font-bold">Sukses</p>
-                <p><?= session()->getFlashdata('success') ?></p>
-            </div>
-        <?php endif; ?>
+        <div class="bg-white rounded-[3rem] shadow-2xl shadow-gray-200/60 p-12 border border-white relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-[#FFF57E] rounded-bl-[5rem] -mr-10 -mt-10 opacity-50"></div>
 
-        <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-[#E3D2C3]">
-            <div class="bg-[#2DAA9E] px-8 py-6">
-                <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                    Parameter SES
-                </h3>
-            </div>
-
-            <form action="<?= base_url('prediksi/proses') ?>" method="post" class="p-8">
+            <form action="<?= base_url('prediksi/proses') ?>" method="post" class="relative z-10">
                 <?= csrf_field() ?>
 
-                <div class="mb-6">
-                    <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">
-                        Nilai Alpha (α)
-                    </label>
-                    <div class="relative">
-                        <input type="number" step="0.1" min="0.1" max="0.9" name="alpha" class="block w-full rounded-xl border-2 border-[#EAEAEA] bg-[#EAEAEA]/30 shadow-sm focus:border-[#2DAA9E] focus:ring focus:ring-[#2DAA9E]/20 text-gray-800 font-bold  p-4 text-lg" placeholder="Contoh: 0.5" required>
-                        <div class="absolute right-10 top-6 text-gray-400 text-sm font-medium">0.1 - 0.9</div>
-                    </div>
-                    <p class="text-xs text-gray-500 mt-2 ml-1">Semakin besar alpha, semakin responsif terhadap perubahan data terbaru.</p>
-                </div>
+                <div class="max-w-md mx-auto">
+                    <div class="bg-[#F8FAFB] p-10 rounded-[2.5rem] mb-10 border border-gray-100 shadow-inner">
+                        <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-6">Jumlah Cluster (K)</label>
 
-                <button type="submit" class="w-full py-4 rounded-xl bg-[#2DAA9E] text-white font-bold shadow-lg hover:shadow-xl hover:bg-[#1f7a70] transition-all transform hover:-translate-y-1 flex justify-center items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                    Hitung Prediksi
-                </button>
+                        <div class="flex items-center justify-center gap-6">
+                            <input type="number" name="k_value" min="2" max="5" value="3"
+                                class="w-32 bg-white border-4 border-[#26CCC2] rounded-3xl p-6 text-center text-5xl font-black text-[#1A1A1A] focus:ring-8 focus:ring-[#6AECE1]/20 outline-none transition-all shadow-lg" required>
+                        </div>
+
+                        <p class="mt-6 text-sm font-bold text-gray-400 italic">Disarankan menggunakan K=2 atau K=3 untuk 50 dataset.</p>
+                    </div>
+
+                    <button type="submit" class="w-full bg-[#FFF57E] hover:bg-[#F3E66B] text-[#1A1A1A] font-black py-6 rounded-[2rem] shadow-xl shadow-[#FFF57E]/40 transition-all transform hover:-translate-y-1 active:scale-95 text-2xl uppercase tracking-[0.2em] flex items-center justify-center gap-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        Eksekusi Algoritma
+                    </button>
+                </div>
             </form>
         </div>
 
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+                <div class="text-[#26CCC2] font-black text-xl mb-1">Step 1</div>
+                <p class="text-xs font-bold text-gray-500 uppercase tracking-tighter">Inisialisasi Centroid Acak</p>
+            </div>
+            <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+                <div class="text-[#FFB76C] font-black text-xl mb-1">Step 2</div>
+                <p class="text-xs font-bold text-gray-500 uppercase tracking-tighter">Hitung Jarak Euclidean</p>
+            </div>
+            <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+                <div class="text-[#26CCC2] font-black text-xl mb-1">Step 3</div>
+                <p class="text-xs font-bold text-gray-500 uppercase tracking-tighter">Iterasi Hingga Konvergen</p>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+    @keyframes zoomIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .container {
+        animation: zoomIn 0.5s ease-out;
+    }
+</style>
+
 <?= $this->endSection(); ?>

@@ -18,24 +18,24 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
     $routes->post('akun/update_profil', 'Akun::updateProfil');
     $routes->post('akun/update_sandi', 'Akun::updateSandi');
 
-    $routes->get('/data-nikah', 'DataNikah::index');
-    $routes->post('/data-nikah/save', 'DataNikah::save');
-    $routes->post('/data-nikah/upload', 'DataNikah::upload');
-    $routes->get('/data-nikah/hapus-semua', 'DataNikah::hapusSemua');
-    $routes->get('/data-nikah/delete/(:num)', 'DataNikah::delete/$1');
+    // Cari kode ini dan sesuaikan:
+    $routes->get('dataset', 'Dataset::index');
+    $routes->post('dataset/save', 'Dataset::save');
+    $routes->post('dataset/upload', 'Dataset::upload');
+    $routes->get('dataset/delete/(:num)', 'Dataset::delete/$1');
+    $routes->get('dataset/hapus-semua', 'Dataset::hapusSemua');
+    $routes->post('dataset/update/(:num)', 'Dataset::update/$1');
 
+    // --- RUTE PREDIKSI ---
     $routes->get('/prediksi', 'Prediksi::index');
     $routes->post('/prediksi/proses', 'Prediksi::proses');
-    $routes->post('/prediksi/simpan', 'Prediksi::simpan');
+    $routes->post('prediksi/simpan', 'Prediksi::simpan');
 
+    // --- RUTE HISTORY ---
     $routes->get('/history', 'History::index');
     $routes->get('/history/delete/(:num)', 'History::delete/$1');
     $routes->get('/history/hapus-semua', 'History::hapusSemua');
     $routes->get('/history/detail/(:num)', 'History::detail/$1');
-
-
-    // --- RUTE HISTORY ---
-
 });
 
 
@@ -49,4 +49,4 @@ $routes->group('', ['filter' => 'guest'], function ($routes) {
 // --- RUTE AKSI PUBLIK ---
 $routes->post('login', 'Auth::login');
 $routes->post('register', 'Auth::processRegister');
-$routes->get('logout', 'Auth::logout'); // Pastikan Auth::logout menggunakan GET atau sesuaikan
+$routes->get('logout', 'Auth::logout');

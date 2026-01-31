@@ -1,183 +1,108 @@
-<?php helper('form'); ?>
 <?= $this->extend('layout/layout'); ?>
 <?= $this->section('content'); ?>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div class="min-h-screen bg-[#EAEAEA] py-8 font-sans text-gray-800">
-    <div class="mb-8">
-        <h1 class="text-3xl font-extrabold text-[#2DAA9E]">Dashboard</h1>
-        <p class="text-gray-600 mt-1">Selamat datang kembali, Berikut adalah ringkasan data pernikahan.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-
-        <div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-[#2DAA9E] flex items-center justify-between group hover:shadow-md transition-all">
-            <div>
-                <p class="text-gray-400 font-bold text-xs uppercase tracking-wider mb-1">Total Data Masuk</p>
-                <h2 class="text-3xl font-black text-gray-800"><?= $total_data ?></h2>
-                <a href="<?= base_url('data-nikah') ?>" class="text-xs text-[#2DAA9E] font-bold hover:underline mt-1 inline-block">Lihat Detail &rarr;</a>
-            </div>
-            <div class="p-3 bg-[#E3D2C3]/30 rounded-xl text-[#2DAA9E] group-hover:bg-[#2DAA9E] group-hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-[#66D2CE] flex items-center justify-between group hover:shadow-md transition-all">
-            <div>
-                <p class="text-gray-400 font-bold text-xs uppercase tracking-wider mb-1">Total Peramalan</p>
-                <h2 class="text-3xl font-black text-gray-800"><?= $total_history ?></h2>
-                <a href="<?= base_url('history') ?>" class="text-xs text-[#66D2CE] font-bold hover:underline mt-1 inline-block">Lihat Riwayat &rarr;</a>
-            </div>
-            <div class="p-3 bg-[#E3D2C3]/30 rounded-xl text-[#66D2CE] group-hover:bg-[#66D2CE] group-hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                </svg>
-            </div>
-        </div>
-
-        <div class="bg-[#2DAA9E] rounded-2xl p-6 shadow-lg text-white relative overflow-hidden group">
-            <div class="absolute top-0 right-0 -mr-6 -mt-6 w-24 h-24 rounded-full bg-white opacity-10 group-hover:scale-110 transition-transform"></div>
-
-            <p class="text-[#E3D2C3] font-bold text-xs uppercase tracking-wider mb-2">Prediksi Terakhir</p>
-            <div class="flex items-baseline gap-2">
-                <h2 class="text-4xl font-black"><?= $last_prediksi ?></h2>
-                <span class="text-sm opacity-80">Pasang</span>
-            </div>
-            <p class="text-xs mt-2 bg-white/20 inline-block px-2 py-1 rounded">
-                Target: <?= $last_target ?>
-            </p>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-        <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-[#E3D2C3]/50 p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="font-bold text-gray-800 flex items-center gap-2">
-                    <span class="w-2 h-6 bg-[#2DAA9E] rounded-full"></span>
-                    Grafik Tren Data Pernikahan
-                </h3>
-                <span class="text-xs text-gray-400 bg-[#EAEAEA] px-2 py-1 rounded">Data Aktual</span>
+<div class="min-h-screen bg-brand-bg font-sans text-brand-dark overflow-hidden">
+    <div class="container mx-auto max-w-7xl px-4 py-12">
+        <div class="flex flex-col lg:flex-row items-center gap-16 animate-fadeIn">
+            <div class="flex-1 text-center lg:text-left">
+                <div class="inline-flex items-center gap-3 mb-6 bg-white px-6 py-2 rounded-full shadow-sm border border-white">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-teal opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-teal"></span>
+                    </span>
+                    <span class="text-[10px] font-black uppercase tracking-[0.3em] text-brand-teal">System Operational</span>
+                </div>
+                <h1 class="text-6xl md:text-7xl font-black tracking-tighter leading-[0.9] uppercase italic mb-8">
+                    Smart Cluster <br>
+                    <span class="text-brand-teal">Analysis</span> Center
+                </h1>
+                <p class="text-gray-400 font-bold text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10 italic">
+                    Platform riset cerdas berbasis algoritma K-Means untuk memetakan pola latar belakang pendidikan tokoh sukses secara akurat.
+                </p>
+                <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                    <a href="<?= base_url('prediksi') ?>" class="bg-brand-teal text-white px-10 py-5 rounded-[2rem] font-black uppercase tracking-widest text-xs shadow-2xl shadow-brand-teal/30 hover:bg-brand-dark transition-all transform hover:-translate-y-1 active:scale-95">
+                        Mulai Analisis
+                    </a>
+                    <a href="<?= base_url('dataset') ?>" class="bg-white text-brand-dark border-2 border-white px-10 py-5 rounded-[2rem] font-black uppercase tracking-widest text-xs shadow-xl hover:bg-brand-yellow transition-all transform hover:-translate-y-1 active:scale-95">
+                        Lihat Dataset
+                    </a>
+                </div>
             </div>
 
-            <div class="relative h-80 w-full">
-                <canvas id="mainChart"></canvas>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-2xl shadow-sm border border-[#E3D2C3]/50 overflow-hidden flex flex-col">
-            <div class="p-6 border-b border-[#EAEAEA] bg-[#fdfbf7]">
-                <h3 class="font-bold text-gray-800">Aktivitas Terbaru</h3>
-                <p class="text-xs text-gray-500">5 Perhitungan terakhir</p>
-            </div>
-
-            <div class="flex-1 overflow-y-auto custom-scrollbar p-2">
-                <?php if (empty($recent_history)) : ?>
-                    <div class="text-center py-10 text-gray-400">
-                        <p class="text-sm">Belum ada aktivitas.</p>
-                        <a href="<?= base_url('prediksi') ?>" class="text-[#2DAA9E] text-xs font-bold hover:underline">Mulai Prediksi Sekarang</a>
+            <div class="flex-1 w-full max-w-2xl relative">
+                <div class="absolute -inset-4 bg-gradient-to-tr from-brand-teal/20 to-brand-yellow/20 blur-3xl rounded-[4rem]"></div>
+                <div class="relative grid grid-cols-2 gap-6">
+                    <div class="bg-white p-8 rounded-[3rem] shadow-2xl border border-white transform hover:scale-105 transition-all duration-500">
+                        <div class="w-12 h-12 bg-brand-yellow rounded-2xl mb-6 flex items-center justify-center shadow-lg shadow-brand-yellow/30">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <p class="text-[10px] font-black text-gray-300 uppercase tracking-widest mb-1">Total Dataset</p>
+                        <p class="text-4xl font-black text-brand-dark"><?= $total_tokoh ?? '50' ?></p>
                     </div>
-                <?php else : ?>
-                    <div class="space-y-2">
-                        <?php foreach ($recent_history as $row) : ?>
-                            <div class="flex items-center justify-between p-3 hover:bg-[#EAEAEA]/40 rounded-xl transition-colors border border-transparent hover:border-[#E3D2C3]">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-full bg-[#E3D2C3]/40 text-[#2DAA9E] flex items-center justify-center font-bold text-xs">
-                                        <?= substr($row['periode_target'], 0, 3) ?>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm font-bold text-gray-700"><?= $row['periode_target'] ?></p>
-                                        <p class="text-[10px] text-gray-400"><?= date('d M H:i', strtotime($row['tanggal_simpan'])) ?></p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-sm font-black text-[#2DAA9E]"><?= $row['hasil_prediksi'] ?></p>
-                                    <p class="text-[10px] text-gray-500">MAPE: <?= number_format($row['mape'], 1) ?>%</p>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
+                    <div class="bg-brand-dark p-8 rounded-[3rem] shadow-2xl mt-12 transform hover:scale-105 transition-all duration-500">
+                        <div class="w-12 h-12 bg-brand-teal rounded-2xl mb-6 flex items-center justify-center shadow-lg shadow-brand-teal/30">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">K-Value Limit</p>
+                        <p class="text-4xl font-black text-brand-yellow">K=5</p>
                     </div>
-                <?php endif; ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-32">
+            <div class="text-center mb-16">
+                <h2 class="text-xs font-black text-brand-teal uppercase tracking-[0.5em] mb-4">Research Workflow</h2>
+                <div class="w-20 h-1 bg-brand-yellow mx-auto rounded-full"></div>
             </div>
 
-            <div class="p-3 border-t border-[#EAEAEA] text-center">
-                <a href="<?= base_url('history') ?>" class="text-xs font-bold text-[#66D2CE] hover:text-[#2DAA9E] uppercase tracking-wide">Lihat Semua Riwayat</a>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="group bg-white p-10 rounded-[3rem] border border-white shadow-xl hover:shadow-brand-teal/10 transition-all">
+                    <div class="text-5xl font-black text-brand-bg group-hover:text-brand-teal/10 transition-colors mb-6 tracking-tighter uppercase italic">01</div>
+                    <h3 class="text-xl font-black uppercase italic mb-4">Data Collection</h3>
+                    <p class="text-sm text-gray-400 font-bold leading-relaxed italic">Import data tokoh sukses melalui file CSV atau input manual secara terstruktur.</p>
+                </div>
+                <div class="group bg-brand-teal p-10 rounded-[3rem] border border-brand-teal shadow-2xl transform md:-translate-y-6 transition-all">
+                    <div class="text-5xl font-black text-white/10 mb-6 tracking-tighter uppercase italic">02</div>
+                    <h3 class="text-xl font-black uppercase italic text-white mb-4">Clustering Engine</h3>
+                    <p class="text-sm text-white/70 font-bold leading-relaxed italic">Algoritma K-Means memproses data berdasarkan jarak Euclidean hingga konvergen.</p>
+                </div>
+                <div class="group bg-white p-10 rounded-[3rem] border border-white shadow-xl hover:shadow-brand-teal/10 transition-all">
+                    <div class="text-5xl font-black text-brand-bg group-hover:text-brand-teal/10 transition-colors mb-6 tracking-tighter uppercase italic">03</div>
+                    <h3 class="text-xl font-black uppercase italic mb-4">Pattern Result</h3>
+                    <p class="text-sm text-gray-400 font-bold leading-relaxed italic">Dapatkan hasil pengelompokan yang akurat beserta riwayat analisis terperinci.</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-    const ctx = document.getElementById('mainChart').getContext('2d');
-
-    // Gradien Warna untuk Chart
-    let gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, 'rgba(45, 170, 158, 0.2)'); // #2DAA9E opacity 0.2
-    gradient.addColorStop(1, 'rgba(45, 170, 158, 0)');
-
-    const mainChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: <?= json_encode($chart_labels) ?>,
-            datasets: [{
-                label: 'Jumlah Nikah',
-                data: <?= json_encode($chart_values) ?>,
-                borderColor: '#2DAA9E',
-                backgroundColor: gradient,
-                borderWidth: 2,
-                pointBackgroundColor: '#fff',
-                pointBorderColor: '#2DAA9E',
-                pointRadius: 3,
-                pointHoverRadius: 6,
-                fill: true,
-                tension: 0.3
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    backgroundColor: 'rgba(27, 33, 26, 0.8)',
-                    titleColor: '#EBD5AB',
-                    padding: 10,
-                    cornerRadius: 8,
-                    displayColors: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        color: '#f3f4f6'
-                    },
-                    ticks: {
-                        font: {
-                            size: 10
-                        }
-                    }
-                },
-                x: {
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        font: {
-                            size: 10
-                        },
-                        maxRotation: 0,
-                        autoSkip: true,
-                        maxTicksLimit: 8
-                    }
-                }
-            }
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
         }
-    });
-</script>
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fadeIn {
+        animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    /* Background Pattern */
+    .bg-brand-bg {
+        background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+</style>
 
 <?= $this->endSection(); ?>
