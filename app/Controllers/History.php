@@ -13,34 +13,28 @@ class History extends BaseController
         $this->historyModel = new HistoryModel();
     }
 
+    // Menampilkan seluruh daftar arsip (Memanggil file index.php)
     public function index()
     {
         return view('history/index', [
-            'title'   => 'History Analisis',
-            'history' => $this->historyModel->orderBy('created_at', 'DESC')->findAll(),
-            'active_menu' => 'history'
+            'title'   => 'Daftar History Analisis',
+            'active_menu'  => 'history',
+            'history' => $this->historyModel->orderBy('created_at', 'DESC')->findAll()
         ]);
     }
 
+    // Menampilkan detail item arsip tunggal berdasar ID (Memanggil file detail.php)
     public function detail($id)
     {
-        $dataHistory = $this->historyModel->find($id);
-        $detail = json_decode($dataHistory['detail_json'], true);
+        $dataArchive = $this->historyModel->find($id);
 
-        return view('prediksi/hasil', [
-            'title'         => 'Detail History Analisis',
-            'k_value'       => $dataHistory['k_value'],
-            'iterasi_ke'    => $dataHistory['iterasi'],
-            'centroids'     => $detail['centroids'],
-            'dataset_hasil' => $detail['hasil'],
-            'detail_json'   => $dataHistory['detail_json'],
-            'is_history'    => true // Flag agar tombol "Simpan" di view hasil bisa disembunyikan
+        if (!$dataArchive) {
+            return redirect()->to('/history')->with('error', 'Data arsip tidak ditemukan!');
+        }
+
+        return view('history/detail', [
+            'title'   => 'Detail Arsip #' . $id,
+            'history' => $dataArchive
         ]);
-    }
-
-    public function delete($id)
-    {
-        $this->historyModel->delete($id);
-        return redirect()->to('/history')->with('success', 'Riwayat berhasil dihapus.');
     }
 }

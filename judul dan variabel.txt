@@ -1,0 +1,9 @@
+Judul : *Pola Latar Belakang Pendidikan Tokoh Sukses Menggunakan Metode Clustering K-Means*
+
+variabel :
+jenis institusi (negeri/swasta)
+lokasi (dalam negeri/luar negeri)
+pendidikan terakhir
+jurusan atau program studi
+lama selesai pendidikan
+
